@@ -7,29 +7,6 @@ import { getToken } from "../../util.js";
 dotenv.config();
 const router = express.Router();
 
-router.post("/register-admin", async (req, res) => {
-  console.log("register post called");
-  try {
-    const admin = new User({
-      name: "Kristen",
-      email: "kristen@kristen.com",
-      password: "1234",
-      isAdmin: true,
-    });
-
-    const newAdmin = await admin.save();
-    res.send({
-      _id: newAdmin.id,
-      name: newAdmin.name,
-      email: newAdmin.email,
-      isAdmin: newAdmin.isAdmin,
-      token: getToken(newAdmin),
-    });
-  } catch (error) {
-    res.send({ msg: error.message });
-  }
-});
-
 router.post(
   "/register",
   expressAsyncHandler(async (req, res) => {
