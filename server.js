@@ -58,3 +58,5 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+export { connectDB };

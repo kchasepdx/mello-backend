@@ -2,11 +2,13 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 import { authenticateToken, isAdmin } from "../../util.js";
+import { connectDB } from "../../server.js";
 
 const router = express.Router();
 
 router.get("/editproducts", async (req, res) => {
   try {
+    await connectDB();
     const products = await Product.find({});
     if (products) {
       res.send(products);
