@@ -9,21 +9,30 @@ import checkoutRoute from "./backend/routes/checkoutRoute.js";
 const uri = process.env.MONGODB_URI;
 
 dotenv.config();
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-mongoose.set("useCreateIndex", true);
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    mongoose.set("useCreateIndex", true);
+
+    const db = mongoose.connection;
+    db.on("error", console.error.bind(console, "connection error:"));
+    db.once("open", function () {
+      console.log("mongoose connected");
+      console.log(db.name);
+      console.log("host", db.host);
+    });
+  } catch (err) {
+    console.log("Failed to connect to MongoDB", err);
+  }
+};
+
+connectDB();
 
 const app = express();
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function () {
-  console.log("mongoose connected");
-  console.log(db.name);
-  console.log("host", db.host);
-});
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
