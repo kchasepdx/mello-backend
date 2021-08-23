@@ -8,6 +8,30 @@ dotenv.config();
 const router = express.Router();
 
 router.post(
+  "/create-admin",
+  expressAsyncHandler(async (req, res) => {
+    try {
+      const user = new User({
+        name: "kristen",
+        email: "kristen@kristen.com",
+        password: "1234",
+        isAdmin: true,
+      });
+      const newUser = await user.save();
+      res.send({
+        _id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+        isAdmin: newUser.isAdmin,
+        token: getToken(newUser),
+      });
+    } catch (error) {
+      res.send({ msg: error.message });
+    }
+  })
+);
+
+router.post(
   "/register",
   expressAsyncHandler(async (req, res) => {
     try {
