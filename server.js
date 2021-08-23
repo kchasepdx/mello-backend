@@ -17,6 +17,14 @@ mongoose.set("useCreateIndex", true);
 
 const app = express();
 
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+  console.log("mongoose connected");
+  console.log(db.name);
+  console.log("host", db.host);
+});
+
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -34,14 +42,6 @@ app.use(function (req, res, next) {
     "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
   );
   next();
-});
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function () {
-  console.log("mongoose connected");
-  console.log(db.name);
-  console.log("host", db.host);
 });
 
 app.listen(process.env.PORT, () => {
