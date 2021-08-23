@@ -19,24 +19,22 @@ const connectDB = async () => {
       useFindAndModify: false,
     });
     mongoose.set("useCreateIndex", true);
-    const db = mongoose.connection;
-    console.log(
-      "mongoose connected Database name:" +
-        db.name +
-        JSON.stringify(db.collections)
-    );
-
-    db.on("error", console.error.bind(console, "connection error:"));
-    db.once("open", function () {
-      console.log(db.name);
-      console.log("host", db.host);
-    });
   } catch (err) {
     console.log("Failed to connect to MongoDB", err);
   }
 };
 
 connectDB();
+
+const db = mongoose.connection;
+console.log(
+  "mongoose connected Database name:" + db.name + JSON.stringify(db.collections)
+);
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+  console.log(db.name);
+  console.log("host", db.host);
+});
 
 const app = express();
 
