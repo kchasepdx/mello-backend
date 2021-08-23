@@ -12,7 +12,7 @@ router.get("/editproducts", async (req, res) => {
       res.send(products);
     }
   } catch (error) {
-    res.status("error edit products").body(error);
+    res.send({ message: "could not get products, " + error });
   }
 });
 
