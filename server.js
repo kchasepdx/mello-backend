@@ -15,23 +15,22 @@ const connectDB = async () => {
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      keepAlive: true,
     });
     mongoose.set("useCreateIndex", true);
     console.log("mongoose connected");
+    const db = mongoose.connection;
+    db.on("error", console.error.bind(console, "connection error:"));
+    // db.once("open", function () {
+    //   console.log(db.name);
+    //   console.log("host", db.host);
+    // });
   } catch (err) {
     console.log("Failed to connect to MongoDB", err);
   }
 };
 
 connectDB();
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function () {
-  console.log("mongoose connected");
-  console.log(db.name);
-  console.log("host", db.host);
-});
 
 const app = express();
 
