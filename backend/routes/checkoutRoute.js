@@ -1,6 +1,6 @@
 import express from "express";
 import Stripe from "stripe";
-import { STRIPE_TEST_KEY } from "../config.js";
+import { STRIPE_TEST_KEY } from "../../config.js";
 
 const router = express.Router();
 const YOUR_DOMAIN = "https://mellostore.herokuapp.com/";

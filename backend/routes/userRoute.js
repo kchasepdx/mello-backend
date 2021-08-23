@@ -2,7 +2,7 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import User from "../models/userModels.js";
 import dotenv from "dotenv";
-import { getToken } from "../util.js";
+import { getToken } from "../../util.js";
 
 dotenv.config();
 const router = express.Router();

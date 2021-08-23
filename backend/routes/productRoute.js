@@ -1,7 +1,7 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
-import { authenticateToken, isAdmin } from "../util.js";
+import { authenticateToken, isAdmin } from "../../util.js";
 
 const router = express.Router();
 
