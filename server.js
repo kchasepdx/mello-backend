@@ -7,7 +7,7 @@ import userRoute from "./backend/routes/userRoute.js";
 import productRoute from "./backend/routes/productRoute.js";
 import checkoutRoute from "./backend/routes/checkoutRoute.js";
 const uri = process.env.MONGODB_URI;
-const { MongoClient } = require("mongodb");
+import { MongoClient } from "mongodb";
 
 dotenv.config();
 
