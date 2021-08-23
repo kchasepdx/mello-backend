@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.get("/editproducts", async (req, res) => {
   try {
-    await connectDB();
     const products = await Product.find({});
     if (products) {
       res.send(products);
