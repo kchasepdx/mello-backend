@@ -27,6 +27,10 @@ const connectDB = async () => {
     //   console.log(db.name);
     //   console.log("host", db.host);
     // });
+
+    app.listen(process.env.PORT, () => {
+      console.log("server started");
+    });
   } catch (err) {
     console.log("Failed to connect to MongoDB", err);
   }
@@ -53,8 +57,4 @@ app.use(function (req, res, next) {
     "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
   );
   next();
-});
-
-app.listen(process.env.PORT, () => {
-  console.log("server started");
 });
