@@ -21,7 +21,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:5000/api/products/editproducts
+POST https://mello-store-backend.herokuapp.com/api/products/editproducts
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
     }
         
 ###
-GET http://localhost:5000/api/products/editproducts
+GET https://mello-store-backend.herokuapp.com/api/products/editproducts
 ###
 
 GET http://localhost:5000/api/products/610dfa40cbe0135519167af8
