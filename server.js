@@ -7,30 +7,13 @@ import userRoute from "./backend/routes/userRoute.js";
 import productRoute from "./backend/routes/productRoute.js";
 import checkoutRoute from "./backend/routes/checkoutRoute.js";
 const uri = process.env.MONGODB_URI;
-import { MongoClient } from "mongodb";
 
 dotenv.config();
-
-const client = new MongoClient(uri, {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-client.connect((err) => {
-  const db = client.db("mello");
-  // perform actions on the collection object
-  client.close();
-  db.on("error", console.error.bind(console, "connection error:"));
-  db.once("open", function () {
-    console.log("mongoose connected");
-    console.log(db.name);
-    console.log("host", db.host);
-  });
-});
-// mongoose.connect(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-// mongoose.set("useCreateIndex", true);
+mongoose.set("useCreateIndex", true);
 
 const app = express();
 
@@ -53,7 +36,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-// const db = mongoose.connection;
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+  console.log("mongoose connected");
+  console.log(db.name);
+  console.log("host", db.host);
+});
 
 app.listen(process.env.PORT, () => {
   console.log("server started at https://mello-store-backend.herokuapp.com/");
