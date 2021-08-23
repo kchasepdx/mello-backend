@@ -3,7 +3,8 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
-import Product from "../models/productModel.js";
+import Product from "./backend/models/productModel.js";
+
 // import userRoute from "./backend/routes/userRoute.js";
 // import productRoute from "./backend/routes/productRoute.js";
 // import checkoutRoute from "./backend/routes/checkoutRoute.js";
