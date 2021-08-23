@@ -6,9 +6,10 @@ import dotenv from "dotenv";
 import userRoute from "./backend/routes/userRoute.js";
 import productRoute from "./backend/routes/productRoute.js";
 import checkoutRoute from "./backend/routes/checkoutRoute.js";
+const uri = process.env.MONGODB_URI;
 
 dotenv.config();
-mongoose.connect("mongodb://localhost:27017/mello", {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
