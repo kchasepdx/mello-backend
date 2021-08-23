@@ -13,13 +13,15 @@ dotenv.config();
 const connectDB = async () => {
   try {
     await mongoose.connect(uri, {
+      useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      keepAlive: true,
+      useFindAndModify: false,
     });
     mongoose.set("useCreateIndex", true);
-    console.log("mongoose connected");
     const db = mongoose.connection;
+    console.log("mongoose connected Database name:" + db.connections[0].name);
+
     db.on("error", console.error.bind(console, "connection error:"));
     // db.once("open", function () {
     //   console.log(db.name);
