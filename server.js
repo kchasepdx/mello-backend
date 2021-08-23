@@ -54,5 +54,5 @@ app.use(function (req, res, next) {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log("server started at https://mello-store-backend.herokuapp.com/");
+  console.log("server started");
 });
