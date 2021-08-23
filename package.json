@@ -19,6 +19,7 @@
     "express-async-handler": "^1.1.4",
     "js-cookie": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.11",
     "mongoose": "^5.13.8",
     "morgan": "^1.10.0",
     "stripe": "^8.170.0"
