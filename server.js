@@ -20,7 +20,7 @@ const connectDB = async () => {
     });
     mongoose.set("useCreateIndex", true);
     const db = mongoose.connection;
-    console.log("mongoose connected Database name:" + db.connections[0].name);
+    console.log("mongoose connected Database name:" + db.name);
 
     db.on("error", console.error.bind(console, "connection error:"));
     // db.once("open", function () {
