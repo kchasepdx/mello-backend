@@ -27,9 +27,7 @@ const connectDB = async () => {
 connectDB();
 
 const db = mongoose.connection;
-console.log(
-  "mongoose connected Database name:" + db.name + JSON.stringify(db.collections)
-);
+console.log("mongoose connected Database name:" + db.name);
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {
   console.log(db.name);

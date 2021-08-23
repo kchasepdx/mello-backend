@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema(
     brand: String,
     countInStock: Number,
   },
-  { autoCreate: false, dbName: "mello" }
+  { bufferCommands: false }
 );
 const Product = mongoose.model("Product", productSchema);
 
