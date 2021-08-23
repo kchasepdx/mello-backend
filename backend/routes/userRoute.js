@@ -8,11 +8,13 @@ dotenv.config();
 const router = express.Router();
 
 router.post("/register-admin", async (req, res) => {
+  console.log("register post called");
   try {
     const admin = new User({
       name: "Kristen",
       email: "kristen@kristen.com",
       password: "1234",
+      isAdmin: true,
     });
 
     const newAdmin = await admin.save();
