@@ -15,7 +15,7 @@ dotenv.config();
 
 const connectDB = async () => {
   try {
-    const connection = await mongoose.connect(uri, {
+    await mongoose.connect(uri, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -30,7 +30,7 @@ const connectDB = async () => {
       console.log("host", db.host);
     });
 
-    if (connection) {
+    if (db) {
       app.use(cors());
       app.use(express.urlencoded({ extended: true }));
       app.use(express.json());
@@ -73,7 +73,7 @@ connectDB();
 // app.use("/api/checkout", checkoutRoute);
 
 app.listen(process.env.PORT, () => {
-  console.log("server started");
+  console.log("server started", process.env.PORT);
 });
 
 export { connectDB };
