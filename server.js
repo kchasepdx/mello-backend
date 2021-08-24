@@ -7,7 +7,7 @@ import Product from "./backend/models/productModel.js";
 // import userRoute from "./backend/routes/userRoute.js";
 // import productRoute from "./backend/routes/productRoute.js";
 // import checkoutRoute from "./backend/routes/checkoutRoute.js";
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/mello";
 const app = express();
 
 dotenv.config();
@@ -26,7 +26,7 @@ db.once("open", function () {
   console.log("host", db.host);
 });
 
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("tiny"));
@@ -61,5 +61,5 @@ app.get("/editproducts", async (req, res) => {
 // app.use("/api/checkout", checkoutRoute);
 
 app.listen(process.env.PORT, () => {
-  console.log("server started", process.env.PORT);
+  console.log("server started", process.env.PORT || 5000);
 });
