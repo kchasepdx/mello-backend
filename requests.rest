@@ -51,6 +51,11 @@ GET http://localhost:5000/api/products/610dfa40cbe0135519167af8
 GET http://localhost:5000/api/products/category/hoodie
 
 ### 
+
+
+GET http://mello-store-backend.herokuapp.com/api/products/category/hoodie
+
+### 
 PUT http://localhost:5000/api/products/editproducts
 Content-Type: application/json
 

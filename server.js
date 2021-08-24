@@ -10,7 +10,7 @@ const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/mello";
 
 dotenv.config();
 
-mongoose.connect("mongodb://localhost:27017/mello", {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
