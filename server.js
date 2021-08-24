@@ -21,24 +21,33 @@ const connectDB = async () => {
       useFindAndModify: false,
     });
     mongoose.set("useCreateIndex", true);
+    const db = mongoose.connection;
+    console.log("mongoose connected Database name:" + db.name);
+    db.on("error", console.error.bind(console, "connection error:"));
+    db.once("open", function () {
+      console.log(db.name);
+      console.log("host", db.host);
+    });
 
     if (connection) {
-      const db = mongoose.connection;
-      console.log("mongoose connected Database name:" + db.name);
-      db.on("error", console.error.bind(console, "connection error:"));
-      db.once("open", function () {
-        console.log(db.name);
-        console.log("host", db.host);
-        app.get("/editproducts", async (req, res) => {
-          try {
-            const products = await Product.find({});
-            if (products) {
-              res.send(products);
-            }
-          } catch (error) {
-            res.send({ message: "could not get products, " + error });
-          }
-        });
+      const app = express();
+
+      app.use(cors());
+      app.use(express.urlencoded({ extended: true }));
+      app.use(express.json());
+      app.use(morgan("tiny"));
+      app.use(function (req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Credentials", true);
+        res.header(
+          "Access-Control-Allow-Methods",
+          "GET,PUT,POST,DELETE,OPTIONS"
+        );
+        res.header(
+          "Access-Control-Allow-Headers",
+          "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+        );
+        next();
       });
     }
   } catch (err) {
@@ -54,28 +63,17 @@ connectDB();
 // db.once("open", function () {
 //   console.log(db.name);
 //   console.log("host", db.host);
-// });
+// // });
 
-const app = express();
+// const app = express();
 
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(morgan("tiny"));
+// app.use(cors());
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+// app.use(morgan("tiny"));
 // app.use("/api/users", userRoute);
 // app.use("/api/products", productRoute);
 // app.use("/api/checkout", checkoutRoute);
-
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-//   );
-//   next();
-// });
 
 app.listen(process.env.PORT, () => {
   console.log("server started");
