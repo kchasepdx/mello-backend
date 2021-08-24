@@ -20,7 +20,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://mellostore.herokuapp.com/storefront",
+    Origin: "https://mellostore.herokuapp.com",
   })
 );
 app.use(express.urlencoded({ extended: true }));
