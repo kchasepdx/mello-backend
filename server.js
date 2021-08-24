@@ -19,6 +19,7 @@ mongoose
     useFindAndModify: false,
   })
   .then((connection) => {
+    console.log("return from promise", connection);
     const db = mongoose.connection;
     console.log("mongoose connected Database name:" + db.name);
     db.on("error", console.error.bind(console, "connection error:"));
@@ -29,7 +30,6 @@ mongoose
 
     console.log({
       collections: db.collections,
-      database: db.db,
       models: db.models,
       port: db.port,
     });
