@@ -3,6 +3,9 @@
 GET http://localhost:5000/api/kittens/kitties
 
 ###
+POST https://mello-store-backend.herokuapp.com/api/users/create-admin
+
+###
 
 POST http://localhost:5000/api/users/register
 Content-Type: application/json
