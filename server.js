@@ -37,7 +37,6 @@ mongoose
 mongoose.set("useCreateIndex", true);
 
 app.use(cors());
-console.log("db", db);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("tiny"));
