@@ -3,7 +3,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
-import Product from "./backend/models/productModel.js";
+// import Product from "./backend/models/productModel.js";
 // import userRoute from "./backend/routes/userRoute.js";
 // import productRoute from "./backend/routes/productRoute.js";
 // import checkoutRoute from "./backend/routes/checkoutRoute.js";
@@ -11,22 +11,13 @@ const uri = process.env.MONGODB_URI;
 const app = express();
 
 dotenv.config();
-
-const connectDB = async () => {
-  try {
-    await mongoose.connect(uri, {
-      useCreateIndex: true,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    });
-    mongoose.set("useCreateIndex", true);
-  } catch (err) {
-    console.log("Failed to connect to MongoDB", err);
-  }
-};
-
-connectDB();
+mongoose.connect(uri, {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
+mongoose.set("useCreateIndex", true);
 
 const db = mongoose.connection;
 console.log("mongoose connected Database name:" + db.name);
@@ -36,24 +27,24 @@ db.once("open", function () {
   console.log("host", db.host);
 });
 
-if (db) {
-  // app.use(cors());
-  console.log("db", db);
-  app.use(express.urlencoded({ extended: true }));
-  app.use(express.json());
-  app.use(morgan("tiny"));
+console.log("db", db.collections, db.db, db.models, db.port);
 
-  app.get("/editproducts", async (req, res) => {
-    try {
-      const products = await Product.find({});
-      if (products) {
-        res.send(products);
-      }
-    } catch (error) {
-      res.send({ message: "could not get products, " + error });
-    }
-  });
-}
+app.use(cors());
+console.log("db", db);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(morgan("tiny"));
+
+//   app.get("/editproducts", async (req, res) => {
+//     try {
+//       const products = await Product.find({});
+//       if (products) {
+//         res.send(products);
+//       }
+//     } catch (error) {
+//       res.send({ message: "could not get products, " + error });
+//     }
+//   });
 
 // const db = mongoose.connection;
 // console.log("mongoose connected Database name:" + db.name);
