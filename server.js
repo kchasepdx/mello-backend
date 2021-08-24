@@ -9,6 +9,7 @@ import Product from "./backend/models/productModel.js";
 // import productRoute from "./backend/routes/productRoute.js";
 // import checkoutRoute from "./backend/routes/checkoutRoute.js";
 const uri = process.env.MONGODB_URI;
+const app = express();
 
 dotenv.config();
 
@@ -30,8 +31,6 @@ const connectDB = async () => {
     });
 
     if (connection) {
-      const app = express();
-
       app.use(cors());
       app.use(express.urlencoded({ extended: true }));
       app.use(express.json());
