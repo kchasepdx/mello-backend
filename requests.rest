@@ -40,6 +40,10 @@ Content-Type: application/json
 GET https://mello-store-backend.herokuapp.com/api/products/editproducts
 ###
 
+###
+GET http://localhost:5000/api/products/editproducts
+###
+
 GET http://localhost:5000/api/products/610dfa40cbe0135519167af8
 
 ###
