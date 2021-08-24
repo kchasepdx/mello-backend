@@ -48,6 +48,16 @@ const connectDB = async () => {
           "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
         );
         next();
+        app.get("/editproducts", async (req, res) => {
+          try {
+            const products = await Product.find({});
+            if (products) {
+              res.send(products);
+            }
+          } catch (error) {
+            res.send({ message: "could not get products, " + error });
+          }
+        });
       });
     }
   } catch (err) {
