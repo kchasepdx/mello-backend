@@ -36,28 +36,16 @@ const connectDB = async () => {
       app.use(express.urlencoded({ extended: true }));
       app.use(express.json());
       app.use(morgan("tiny"));
-      app.use(function (req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Credentials", true);
-        res.header(
-          "Access-Control-Allow-Methods",
-          "GET,PUT,POST,DELETE,OPTIONS"
-        );
-        res.header(
-          "Access-Control-Allow-Headers",
-          "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-        );
-        next();
-        app.get("/editproducts", async (req, res) => {
-          try {
-            const products = await Product.find({});
-            if (products) {
-              res.send(products);
-            }
-          } catch (error) {
-            res.send({ message: "could not get products, " + error });
+
+      app.get("/editproducts", async (req, res) => {
+        try {
+          const products = await Product.find({});
+          if (products) {
+            res.send(products);
           }
-        });
+        } catch (error) {
+          res.send({ message: "could not get products, " + error });
+        }
       });
     }
   } catch (err) {
