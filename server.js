@@ -67,5 +67,3 @@ app.use(morgan("tiny"));
 app.listen(process.env.PORT, () => {
   console.log("server started", process.env.PORT);
 });
-
-export { connectDB };
