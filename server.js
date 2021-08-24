@@ -11,23 +11,30 @@ const uri = process.env.MONGODB_URI;
 const app = express();
 
 dotenv.config();
-mongoose.connect(uri, {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
+mongoose
+  .connect(uri, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  .then((connection) => {
+    const db = mongoose.connection;
+    console.log("mongoose connected Database name:" + db.name);
+    db.on("error", console.error.bind(console, "connection error:"));
+    db.once("open", function () {
+      console.log(db.name);
+      console.log("host", db.host);
+    });
+
+    console.log({
+      collections: db.collections,
+      database: db.db,
+      models: db.models,
+      port: db.port,
+    });
+  });
 mongoose.set("useCreateIndex", true);
-
-const db = mongoose.connection;
-console.log("mongoose connected Database name:" + db.name);
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function () {
-  console.log(db.name);
-  console.log("host", db.host);
-});
-
-console.log("db", db.collections, db.db, db.models, db.port);
 
 app.use(cors());
 console.log("db", db);
